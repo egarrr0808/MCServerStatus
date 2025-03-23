@@ -1,0 +1,31 @@
+# Server port for the HTTP API
+port: 8080
+
+# Update interval in seconds
+update-interval: 10
+
+# Security settings
+security:
+  # Enable authentication for the API
+  enable-auth: false
+  # API key (only used if enable-auth is true)
+  api-key: "change-this-to-your-secure-key"
+  
+# CORS settings for web integration
+cors:
+  # Allow requests from these origins (use * for any origin)
+  allowed-origins: "*"
+
+# HTTPS configuration
+https:
+  # Enable HTTPS
+  enabled: false
+  # Path to keystore file (relative to plugin data folder)
+  keystore-path: "ssl/keystore.p12"
+  # Keystore password
+  keystore-password: "changeit"
+  # Keystore type (PKCS12 or JKS)
+  keystore-type: "PKCS12"
+  
+# Debug mode
+debug: false

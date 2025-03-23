@@ -1,0 +1,11 @@
+name: MCServerStatus
+version: '1.0-SNAPSHOT'
+main: com.mcserverstatus.MCServerStatus
+api-version: '1.13'
+authors: [kesarikov]
+description: A plugin that provides server information to a web interface
+commands:
+  mcstatus:
+    description: Control the MCServerStatus plugin
+    usage: /mcstatus [reload|start|stop]
+    permission: mcserverstatus.admin

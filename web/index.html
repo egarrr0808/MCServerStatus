@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Server Status</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        
+        /* Server status styles */
+        .minecraft-server-container {
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        
+        .server-info {
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .server-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .server-header h4 {
+            margin: 0;
+            font-size: 1.4em;
+            color: #2c3e50;
+        }
+        
+        .server-version {
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        
+        .server-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 10px;
+        }
+        
+        .stat {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 12px;
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-label {
+            font-weight: 600;
+            color: #7f8c8d;
+        }
+        
+        .online {
+            color: #27ae60;
+            font-weight: 600;
+        }
+        
+        .offline {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+        
+        .good {
+            color: #27ae60;
+        }
+        
+        .warning {
+            color: #f39c12;
+        }
+        
+        .critical {
+            color: #e74c3c;
+        }
+        
+        /* Player list styles */
+        .player-list, .plugins-list {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .player-list h4, .plugins-list h4 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .no-players {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .players-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .player-card {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .player-avatar {
+            margin-right: 10px;
+        }
+        
+        .player-avatar img {
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+        }
+        
+        .player-name {
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        
+        .player-ping {
+            font-size: 0.8em;
+            color: #7f8c8d;
+        }
+        
+        /* Plugins list styles */
+        .plugins-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 10px;
+        }
+        
+        .plugin-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .plugin-item.enabled {
+            border-left: 3px solid #27ae60;
+        }
+        
+        .plugin-item.disabled {
+            border-left: 3px solid #e74c3c;
+            opacity: 0.7;
+        }
+        
+        .plugin-name {
+            font-weight: 600;
+        }
+        
+        .plugin-version {
+            font-size: 0.8em;
+            color: #7f8c8d;
+        }
+        
+        /* Footer styles */
+        .server-footer {
+            padding: 10px 15px;
+            text-align: right;
+            color: #7f8c8d;
+            font-size: 0.8em;
+        }
+        
+        /* Error styles */
+        .server-error {
+            padding: 20px;
+            text-align: center;
+            color: #e74c3c;
+        }
+        
+        .error-details {
+            margin: 10px 0;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 600px) {
+            .server-stats, .players-grid, .plugins-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Minecraft Server Status</h1>
+        
+        <!-- Server status will be displayed here -->
+        <div id="minecraft-server-status">
+            <p>Loading server data...</p>
+        </div>
+    </div>
+    
+    <!-- Include the JavaScript file -->
+    <script src="minecraft-server-status.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set the API URL to your PHP proxy
+            mcServerStatusModule.setApiUrl('mc-proxy.php');
+        });
+    </script>
+</body>
+</html>
