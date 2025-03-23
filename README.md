@@ -44,7 +44,7 @@ MCServerStatus/
 
 ### Plugin Installation
 
-1. Download the latest `mcserverstatus-x.x.x.jar` file from the [Releases](https://github.com/yourusername/mcserverstatus/releases) page
+1. Download the latest `mcserverstatus-x.x.x.jar` file from the [Releases](https://github.com/egarrr0808/MCServerStatus/releases/tag/plugin) page
 2. Place the JAR file in your server's `plugins` directory
 3. Restart your server or run `/reload` command
 4. The plugin will generate a default configuration file at `plugins/MCServerStatus/config.yml`
