@@ -1,0 +1,2 @@
+# MCServerStatus
+Minecraft Server Status
